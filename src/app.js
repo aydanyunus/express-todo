@@ -1,19 +1,18 @@
 import express from 'express';
 import dotenv from 'dotenv';
+import todoRouter from './routes/todo.route.js';
 dotenv.config();
 
-import todoRouter from './routes/todo.route.js';
-
-const port = process.env.PORT
+const port = process.env.PORT;
+const host = process.env.HOST;
 
 const app = express();
 
 app.use(express.json());
 
+app.use('/todos', todoRouter);
 
-app.use('/todo', todoRouter)
 
-
-app.listen(port, ()=> {
-    console.log(`server running on ${port}`)
-})
+app.listen(port,host, () => {
+  console.log(`server running on ${host}:${port}`);
+});
